@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # RAG-Powered Customer Insight Generation for E-Commerce
 ## Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
 
