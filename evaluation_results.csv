@@ -1,2 +1,3 @@
-rouge1,rouge2,rougeL,bertscore_precision,bertscore_recall,bertscore_f1,faithfulness,answer_relevance
-0.4121,0.2051,0.4121,0.8918,0.9361,0.9131,0.5567,0.2857
+version https://git-lfs.github.com/spec/v1
+oid sha256:e16166f19f69be2a767b28f0bece19939d898f672620067d92701b7f17ca3766
+size 159

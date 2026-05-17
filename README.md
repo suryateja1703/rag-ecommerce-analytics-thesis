@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RAG-Powered Customer Insight Generation for E-Commerce
 ## Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
 
@@ -161,3 +162,7 @@ thesis/
 - **Department:** Computer and Information Science
 - **Thesis Advisor:** [Advisor Name]
 - **Year:** 2026
+=======
+# rag-ecommerce-analytics-thesis
+RAG-Powered Customer Insight Generation for E-Commerce — UMass Dartmouth MS Thesis 2026
+>>>>>>> 74d4fb31914c0be262d7e2788c7f7cd2ce1393dc
