@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  rag-analytics:
+    build: .
+    container_name: rag-thesis
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./embeddings:/app/embeddings
+      - ./data:/app/data
+      - ./mlruns:/app/mlruns
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - PRIMARY_MODEL=${PRIMARY_MODEL}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - CHROMA_PERSIST_PATH=/app/embeddings
+      - DATA_PATH=/app/data/processed
+      - MLFLOW_TRACKING_URI=/app/mlruns
+      - RETRIEVAL_K=${RETRIEVAL_K}
+      - TEMPERATURE=${TEMPERATURE}
+      - TRANSFORMERS_OFFLINE=1
+      - HF_DATASETS_OFFLINE=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  mlflow:
+    image: python:3.10-slim
+    container_name: mlflow-server
+    working_dir: /app
+    volumes:
+      - ./mlruns:/app/mlruns
+    ports:
+      - "5000:5000"
+    command: >
+      bash -c "pip install mlflow &&
+               mlflow server
+               --host 0.0.0.0
+               --port 5000
+               --backend-store-uri /app/mlruns"
+    restart: unless-stopped
