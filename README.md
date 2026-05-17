@@ -160,7 +160,7 @@ thesis/
 - **Institution:** University of Massachusetts Dartmouth
 - **Program:** Master of Science in Data Science
 - **Department:** Computer and Information Science
-- **Thesis Advisor:** [Advisor Name]
+- **Thesis Advisor:** 
 - **Year:** 2026
 =======
 # rag-ecommerce-analytics-thesis
