@@ -1,0 +1,11 @@
+[server]
+maxUploadSize = 1000
+headless = true
+enableXsrfProtection = false
+
+[theme]
+primaryColor = "#1f77b4"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F7FF"
+textColor = "#262730"
+font = "sans serif"
