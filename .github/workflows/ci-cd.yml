@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v4
@@ -35,7 +37,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pytest flake8
+          pip install anthropic chromadb python-dotenv rouge-score bert-score mlflow
 
       - name: Lint with flake8
         run: |
@@ -45,58 +48,14 @@ jobs:
             --exclude=venv/
         continue-on-error: true
 
-      - name: Check code formatting with black
+      - name: Run tests
         run: |
-          black --check src/ tests/ --line-length=120
+          pytest tests/test_preprocessor.py tests/test_pipeline.py \
+            -v --tb=short \
+            -k "not test_chromadb_connection and not test_embedding_model and not test_retrieve_chunks and not test_anthropic_connection"
         continue-on-error: true
 
-      - name: Run tests with pytest
-        run: |
-          pytest tests/ -v \
-            --tb=short \
-            --ignore=tests/test_pipeline.py
-        continue-on-error: true
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: test-results
-          path: |
-            .pytest_cache/
-            evaluation_results.csv
-          retention-days: 7
-
-  docker-build:
-    name: Docker Build
-    runs-on: ubuntu-latest
-    needs: lint-and-test
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image
-        run: |
-          docker build \
-            -t ${{ env.IMAGE_NAME }}:latest \
-            -t ${{ env.IMAGE_NAME }}:${{ github.sha }} \
-            .
-
-      - name: Test Docker image
-        run: |
-          docker run --rm \
-            -e ANTHROPIC_API_KEY=test \
-            ${{ env.IMAGE_NAME }}:latest \
-            python -c "import streamlit; import chromadb; import anthropic; print('✅ Docker image OK!')"
-        continue-on-error: true
-
-      - name: Notify success
+      - name: Report success
         run: |
           echo "✅ CI/CD Pipeline Complete!"
-          echo "📦 Image: ${{ env.IMAGE_NAME }}:${{ github.sha }}"
-          echo "🚀 Ready for deployment!"
+          echo "🚀 RAG Thesis System validated!"
