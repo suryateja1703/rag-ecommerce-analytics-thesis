@@ -1,64 +1,104 @@
+# RAG-Powered Customer Insight Generation for E-Commerce Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
 
-# RAG-Powered Customer Insight Generation for E-Commerce
-## Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
+**University of Massachusetts Dartmouth**  
+**Master of Science in Data Science | 2026**  
+**Author: Sai Surya Teja Medisetty**  
+**Thesis Advisor: Amir Akhavan Masoumi**  
+**Committee: Debarun Das | Ashokkumar Patel**
 
-**University of Massachusetts Dartmouth**
-**Master of Science in Data Science | 2026**
-**Author: Surya [Last Name]**
+---
+
+## 🌐 Live Demo
+
+| | Link |
+|---|---|
+| 🚀 **Live Dashboard** | [ProductIQ — Launch App](https://rag-ecommerce-analytics-thesis-qrkezbgmwtkwsfuafdsnbt.streamlit.app) |
+| 💻 **GitHub Repo** | [suryateja1703/rag-ecommerce-analytics-thesis](https://github.com/suryateja1703/rag-ecommerce-analytics-thesis) |
+| 📦 **Dataset** | [Amazon Reviews 2023 — UCSD](https://amazon-reviews-2023.github.io) |
 
 ---
 
 ## 🎯 Overview
 
-An intelligent analytics platform that leverages Retrieval-Augmented 
-Generation (RAG) with Claude Opus 4.6 to generate business insights 
-from Amazon Electronics product metadata at enterprise scale.
+**ProductIQ** is an AI-powered product analytics platform that uses Retrieval-Augmented Generation (RAG) with Claude Opus 4.6 to generate structured, executive-ready business insights from 200,000 Amazon Electronics products.
 
-The system retrieves semantically relevant product information using 
-BGE-M3 embeddings and ChromaDB vector search, then generates 
-structured analytical insights using Claude Opus 4.6.
+The system uses BGE-M3 sentence embeddings and ChromaDB vector search to retrieve the most semantically relevant products for any business query, then conditions Claude Opus 4.6 to synthesize those products into coherent analytical reports complete with market analysis and strategic recommendations.
 
----
+Built with a production-first mindset — every component is containerized, tested, tracked, and deployed through an automated CI/CD pipeline.
 
-## 🏗️ Architecture
-Amazon Metadata (200K products)
-↓
-Preprocessing Pipeline (1.82M chunks)
-↓
-BGE-M3 Embeddings + ChromaDB (200K vectors)
-↓
-LangChain RAG Chain
-↓
-Claude Opus 4.6 (Insight Generation)
-↓
-MLflow + Docker + GitHub Actions (MLOps)
-↓
-Streamlit Dashboard (Live Demo)
 ---
 
 ## 🔥 Tech Stack
 
 | Component | Technology |
-|-----------|-----------|
+|---|---|
 | **LLM** | Claude Opus 4.6 (Anthropic) |
-| **Embeddings** | BGE-M3 (BAAI) |
-| **Vector Store** | ChromaDB |
+| **Embeddings** | BGE-M3 (BAAI) — 1024-dim vectors |
+| **Vector Store** | ChromaDB + HNSW indexing |
 | **RAG Framework** | LangChain |
 | **Experiment Tracking** | MLflow |
 | **Containerization** | Docker |
 | **CI/CD** | GitHub Actions |
 | **Dashboard** | Streamlit + Plotly |
-| **Evaluation** | ROUGE + BERTScore + DeepEval + RAGAS |
+| **Evaluation** | ROUGE + BERTScore |
+
+---
+
+## 🏗️ Architecture
+RAG-Powered Customer Insight Generation for E-Commerce Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
+Amazon Electronics Metadata (200K products)
+↓
+Preprocessing Pipeline — 1,820,026 chunks
+↓
+BGE-M3 Embeddings — 1024-dim vectors
+↓
+ChromaDB Vector Store — 200K indexed vectors
+↓
+RAG Pipeline — Retrieve (20) → Rerank (5) → Prompt
+↓
+Claude Opus 4.6 — Insight Generation
+↓
+ProductIQ Streamlit Dashboard
+↓
+MLflow + Docker + GitHub Actions (MLOps)
 
 ---
 
 ## 📊 Dataset
 
-- **Source:** Amazon Electronics Metadata (UCSD 2023)
-- **Products:** 200,000 electronics products
-- **Chunks:** 1,820,026 text chunks
+- **Source:** [Amazon Reviews 2023 — UCSD](https://amazon-reviews-2023.github.io)
+- **Category:** Electronics
+- **Products:** 200,000 product records
+- **Chunks:** 1,820,026 text chunks after preprocessing
 - **Vectors:** 200,000 indexed in ChromaDB
-- **Fields:** Title, Brand, Category, Price, Rating, Description, Features
+- **Fields:** Title, Brand, Category, Price, Rating, Description, Features, Specifications
+
+---
+
+## 📈 Evaluation Results
+
+| Metric | Score | Description |
+|---|---|---|
+| **ROUGE-1** | 0.4121 | Unigram lexical overlap |
+| **ROUGE-2** | 0.2051 | Bigram lexical overlap |
+| **ROUGE-L** | 0.4121 | Longest common subsequence |
+| **BERTScore Precision** | 0.8918 | Semantic precision |
+| **BERTScore Recall** | 0.9361 | Semantic recall |
+| **BERTScore F1** | 0.9131 | Semantic similarity |
+| **Faithfulness** | 0.5567 | Context grounding |
+| **Answer Relevance** | 0.2857 | Query alignment |
+
+---
+
+## ✅ System Stats
+
+| Metric | Value |
+|---|---|
+| **Vectors Indexed** | 200,000 |
+| **Chunks Processed** | 1,820,026 |
+| **Tests Passing** | 16 / 16 ✅ |
+| **Search Latency** | < 0.2s |
+| **Test Suite Time** | 11.18s |
 
 ---
 
@@ -66,7 +106,7 @@ Streamlit Dashboard (Live Demo)
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/rag-ecommerce-analytics-thesis
+git clone https://github.com/suryateja1703/rag-ecommerce-analytics-thesis
 cd rag-ecommerce-analytics-thesis
 python -m venv venv
 venv\Scripts\activate
@@ -74,14 +114,16 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure Environment
+Create a `.env` file:
 ```bash
-# Create .env file
 ANTHROPIC_API_KEY=your_key_here
 PRIMARY_MODEL=claude-opus-4-6
 EMBEDDING_MODEL=BAAI/bge-m3
 CHROMA_PERSIST_PATH=./embeddings
 DATA_PATH=./data/processed
 MLFLOW_TRACKING_URI=./mlruns
+RETRIEVAL_K=5
+TEMPERATURE=0.3
 ```
 
 ### 3. Run Pipeline
@@ -89,7 +131,7 @@ MLFLOW_TRACKING_URI=./mlruns
 # Step 1 — Preprocess data
 python src/data/preprocessor.py
 
-# Step 2 — Embed chunks
+# Step 2 — Embed chunks into ChromaDB
 python src/rag/embedder.py
 
 # Step 3 — Test RAG pipeline
@@ -114,55 +156,45 @@ pytest tests/ -v
 
 ---
 
-## 📈 Evaluation Results
-
-| Metric | Score |
-|--------|-------|
-| ROUGE-1 | TBD |
-| ROUGE-2 | TBD |
-| ROUGE-L | TBD |
-| BERTScore F1 | TBD |
-| Faithfulness | TBD |
-| Answer Relevance | TBD |
-
----
-
 ## 📁 Project Structure
-thesis/
+rag-ecommerce-analytics-thesis/
 ├── src/
 │   ├── data/
-│   │   └── preprocessor.py     # Data pipeline
+│   │   └── preprocessor.py        # Data ingestion & chunking pipeline
 │   ├── rag/
-│   │   ├── embedder.py         # BGE-M3 + ChromaDB
-│   │   └── pipeline.py         # RAG chain
+│   │   ├── embedder.py            # BGE-M3 embedding + ChromaDB indexing
+│   │   └── pipeline.py            # RAG chain — retrieve, rerank, generate
 │   ├── evaluation/
-│   │   └── metrics.py          # ROUGE + BERTScore
+│   │   └── metrics.py             # ROUGE + BERTScore evaluation
 │   └── app/
-│       └── dashboard.py        # Streamlit UI
+│       └── dashboard.py           # ProductIQ Streamlit dashboard
 ├── tests/
-│   ├── test_preprocessor.py
-│   └── test_pipeline.py
+│   ├── test_preprocessor.py       # Preprocessing unit tests
+│   └── test_pipeline.py           # Pipeline unit tests
+├── embeddings/                    # ChromaDB persistent vector store
 ├── data/
-│   ├── raw/                    # Raw dataset
-│   └── processed/              # Processed chunks
-├── embeddings/                 # ChromaDB vectors
-├── mlruns/                     # MLflow experiments
-├── .github/workflows/
-│   └── ci-cd.yml              # GitHub Actions
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
+│   ├── raw/                       # Raw Amazon metadata
+│   └── processed/                 # Preprocessed chunks CSV
+├── mlruns/                        # MLflow experiment artifacts
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml              # GitHub Actions CI/CD pipeline
+├── .streamlit/
+│   └── config.toml                # Streamlit configuration
+├── Dockerfile                     # Container build spec
+├── docker-compose.yml             # Multi-service orchestration
+├── requirements.txt               # Python dependencies
 └── README.md
+
 ---
 
 ## 🎓 Academic Information
 
-- **Institution:** University of Massachusetts Dartmouth
-- **Program:** Master of Science in Data Science
-- **Department:** Computer and Information Science
-- **Thesis Advisor:** 
-- **Year:** 2026
-=======
-# rag-ecommerce-analytics-thesis
-RAG-Powered Customer Insight Generation for E-Commerce — UMass Dartmouth MS Thesis 2026
->>>>>>> 74d4fb31914c0be262d7e2788c7f7cd2ce1393dc
+| | |
+|---|---|
+| **Institution** | University of Massachusetts Dartmouth |
+| **Program** | Master of Science in Data Science |
+| **Department** | Computer and Information Science |
+| **Thesis Advisor** | Amir Akhavan Masoumi |
+| **Committee** | Debarun Das, Ashokkumar Patel |
+| **Year** | 2026 |
