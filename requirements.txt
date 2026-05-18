@@ -12,22 +12,24 @@ langchain-anthropic
 langchain-community
 langchain-chroma
 langchain-text-splitters
+llama-index
+llama-index-llms-anthropic
+llama-index-embeddings-huggingface
 
-# Embeddings
+# Embeddings & Reranker
 sentence-transformers
-torch
-torchvision
-torchaudio
-transformers
-accelerate
+FlagEmbedding
 
 # Vector Store
 chromadb
 
-# MLOps
+# MLOps & Observability
 mlflow
+langfuse
 
 # Evaluation
+deepeval
+ragas
 rouge-score
 bert-score
 
@@ -38,9 +40,11 @@ plotly
 # Testing
 pytest
 flake8
+black
 
 # Utilities
 tqdm
 beautifulsoup4
 tiktoken
 httpx
+accelerate
