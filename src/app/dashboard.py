@@ -9,17 +9,11 @@ from dotenv import load_dotenv
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-os.environ["TRANSFORMERS_OFFLINE"] = "0"
-os.environ["HF_DATASETS_OFFLINE"] = "0"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 load_dotenv()
-# Use Streamlit secrets if available
-import streamlit as st
-def get_secret(key, default=""):
-    try:
-        return st.secrets[key]
-    except:
-        return os.getenv(key, default)
+
 # ── Page Config ───────────────────────────────────
 st.set_page_config(
     page_title="RAG Analytics — Claude Opus 4.6",
@@ -70,7 +64,7 @@ def load_resources():
             api_key=os.getenv("ANTHROPIC_API_KEY")
         )
         chroma_client = chromadb.PersistentClient(
-            path=st.secrets.get("CHROMA_PERSIST_PATH", os.getenv("CHROMA_PERSIST_PATH", "./embeddings"))
+            path=os.getenv("CHROMA_PERSIST_PATH", "./embeddings")
         )
         collection = chroma_client.get_collection("amazon_products")
         return embed_model, claude_client, collection, True
