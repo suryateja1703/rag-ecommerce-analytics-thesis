@@ -8,7 +8,7 @@ An intelligent product analytics platform built on the Amazon Electronics datase
 
 | | Link |
 |---|---|
-| 🚀 **Live Dashboard** | | 🚀 **Live Dashboard** | Run locally — see Quick Start below |
+| 🚀 **Live Dashboard** | Run locally — see Quick Start below |
 | 💻 **GitHub Repo** | [suryateja1703/rag-ecommerce-analytics-thesis](https://github.com/suryateja1703/rag-ecommerce-analytics-thesis) |
 | 📦 **Dataset** | [Amazon Reviews 2023 — UCSD](https://amazon-reviews-2023.github.io) |
 
