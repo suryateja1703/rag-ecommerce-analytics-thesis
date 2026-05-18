@@ -1,8 +1,6 @@
 # RAG-Powered Customer Insight Generation for E-Commerce Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
 
-**University of Massachusetts Dartmouth**  
-**Master of Science in Data Science | 2026**  
-**Author: Sai Surya Teja Medisetty** 
+An intelligent product analytics platform built on the Amazon Electronics dataset, combining semantic vector search, Retrieval-Augmented Generation, and AI-powered natural language querying to make product intelligence more accessible and actionable.
 
 ---
 
@@ -43,7 +41,6 @@ Built with a production-first mindset — every component is containerized, test
 ---
 
 ## 🏗️ Architecture
-RAG-Powered Customer Insight Generation for E-Commerce Using LLMs, Vector Search, and an End-to-End MLOps Pipeline
 Amazon Electronics Metadata (200K products)
 ↓
 Preprocessing Pipeline — 1,820,026 chunks
@@ -186,13 +183,14 @@ rag-ecommerce-analytics-thesis/
 
 ---
 
-## 🎓 Academic Information
+## 👨‍💻 Author
 
-| | |
-|---|---|
-| **Institution** | University of Massachusetts Dartmouth |
-| **Program** | Master of Science in Data Science |
-| **Department** | Computer and Information Science |
-| **Thesis Advisor** | Amir Akhavan Masoumi |
-| **Committee** | Debarun Das, Ashokkumar Patel |
-| **Year** | 2026 |
+**Sai Surya Teja Medisetty** — MS in Data Science, UMass Dartmouth
+
+GitHub: [@suryateja1703](https://github.com/suryateja1703)
+
+---
+
+## 📄 License
+
+This project is for academic purposes — MS Data Science Thesis, UMass Dartmouth 2026.
