@@ -70,7 +70,7 @@ def load_resources():
             api_key=os.getenv("ANTHROPIC_API_KEY")
         )
         chroma_client = chromadb.PersistentClient(
-            path=path=st.secrets.get("CHROMA_PERSIST_PATH", os.getenv("CHROMA_PERSIST_PATH", "./embeddings"))
+            path=st.secrets.get("CHROMA_PERSIST_PATH", os.getenv("CHROMA_PERSIST_PATH", "./embeddings"))
         )
         collection = chroma_client.get_collection("amazon_products")
         return embed_model, claude_client, collection, True
