@@ -4,3 +4,4 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 data/processed/processed_chunks.csv filter=lfs diff=lfs merge=lfs -text
 embeddings/** filter=lfs diff=lfs merge=lfs -text
+embeddings_demo/** filter=lfs diff=lfs merge=lfs -text
