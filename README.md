@@ -2,9 +2,7 @@
 
 **University of Massachusetts Dartmouth**  
 **Master of Science in Data Science | 2026**  
-**Author: Sai Surya Teja Medisetty**  
-**Thesis Advisor: Amir Akhavan Masoumi**  
-**Committee: Debarun Das | Ashokkumar Patel**
+**Author: Sai Surya Teja Medisetty** 
 
 ---
 
